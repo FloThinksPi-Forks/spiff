@@ -2,8 +2,8 @@ package passwd
 
 import (
 	"fmt"
-	"github.com/cloudfoundry-incubator/candiedyaml"
-	. "github.com/mandelsoft/spiff/dynaml"
+	"github.com/mandelsoft/spiff/dynaml"
+	"github.com/mandelsoft/spiff/legacy/candiedyaml"
 )
 
 type Encoding interface {
@@ -20,8 +20,8 @@ const F_Decrypt = "decrypt"
 const F_Encrypt = "encrypt"
 
 func init() {
-	RegisterFunction(F_Decrypt, func_decrypt)
-	RegisterFunction(F_Encrypt, func_encrypt)
+	dynaml.RegisterFunction(F_Decrypt, func_decrypt)
+	dynaml.RegisterFunction(F_Encrypt, func_encrypt)
 }
 
 func RegisterEncryption(name string, e Encoding) {
@@ -32,13 +32,13 @@ func GetEncoding(name string) Encoding {
 	return encodings[name]
 }
 
-func func_decrypt(arguments []interface{}, binding Binding) (interface{}, EvaluationInfo, bool) {
-	info := DefaultInfo()
+func func_decrypt(arguments []interface{}, binding dynaml.Binding) (interface{}, dynaml.EvaluationInfo, bool) {
+	info := dynaml.DefaultInfo()
 	if len(arguments) < 1 || len(arguments) > 3 {
 		return info.Error("%s expects one, two or three arguments", F_Decrypt)
 	}
 
-	value, err := StringValue(F_Decrypt, arguments[0])
+	value, err := dynaml.StringValue(F_Decrypt, arguments[0])
 	if err != nil {
 		return info.Error(err)
 	}
@@ -47,7 +47,7 @@ func func_decrypt(arguments []interface{}, binding Binding) (interface{}, Evalua
 	method := TRIPPLEDES
 	v := ""
 	if len(arguments) > 1 {
-		v, err = StringValue(fmt.Sprintf("%s: 2nd argument", F_Decrypt), arguments[1])
+		v, err = dynaml.StringValue(fmt.Sprintf("%s: 2nd argument", F_Decrypt), arguments[1])
 		if err != nil {
 			return info.Error(err)
 		}
@@ -61,7 +61,7 @@ func func_decrypt(arguments []interface{}, binding Binding) (interface{}, Evalua
 			key = v
 		}
 	case 3:
-		m, err := StringValue(fmt.Sprintf("%s: method", F_Decrypt), arguments[2])
+		m, err := dynaml.StringValue(fmt.Sprintf("%s: method", F_Decrypt), arguments[2])
 		if err != nil {
 			return info.Error(err)
 		}
@@ -80,12 +80,12 @@ func func_decrypt(arguments []interface{}, binding Binding) (interface{}, Evalua
 	if err != nil {
 		return info.Error(err)
 	}
-	return ParseData("<decrypt>", []byte(result), "import", binding)
+	return dynaml.ParseData("<decrypt>", []byte(result), "import", binding)
 
 }
 
-func func_encrypt(arguments []interface{}, binding Binding) (interface{}, EvaluationInfo, bool) {
-	info := DefaultInfo()
+func func_encrypt(arguments []interface{}, binding dynaml.Binding) (interface{}, dynaml.EvaluationInfo, bool) {
+	info := dynaml.DefaultInfo()
 	if len(arguments) < 1 || len(arguments) > 3 {
 		return info.Error("%s expects one, two or three arguments", F_Encrypt)
 	}
@@ -99,7 +99,7 @@ func func_encrypt(arguments []interface{}, binding Binding) (interface{}, Evalua
 	method := TRIPPLEDES
 	v := ""
 	if len(arguments) > 1 {
-		v, err = StringValue(fmt.Sprintf("%s: 2nd argument", F_Encrypt), arguments[1])
+		v, err = dynaml.StringValue(fmt.Sprintf("%s: 2nd argument", F_Encrypt), arguments[1])
 		if err != nil {
 			return info.Error(err)
 		}
@@ -113,7 +113,7 @@ func func_encrypt(arguments []interface{}, binding Binding) (interface{}, Evalua
 			key = v
 		}
 	case 3:
-		m, err := StringValue(fmt.Sprintf("%s: method", F_Encrypt), arguments[2])
+		m, err := dynaml.StringValue(fmt.Sprintf("%s: method", F_Encrypt), arguments[2])
 		if err != nil {
 			return info.Error(err)
 		}

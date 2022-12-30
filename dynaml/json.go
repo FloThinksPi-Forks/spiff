@@ -1,7 +1,7 @@
 package dynaml
 
 import (
-	"github.com/cloudfoundry-incubator/candiedyaml"
+	"github.com/mandelsoft/spiff/legacy/candiedyaml"
 	"github.com/mandelsoft/spiff/yaml"
 	"strings"
 )

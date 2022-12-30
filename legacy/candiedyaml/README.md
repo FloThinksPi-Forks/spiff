@@ -27,7 +27,7 @@ Usage
 package myApp
 
 import (
-  "github.com/cloudfoundry-incubator/candiedyaml"
+  "github.com/mandelsoft/spiff/legacy/candiedyaml"
   "fmt"
   "os"
 )

@@ -1,10 +1,7 @@
 package yaml
 
 import (
-	"github.com/cloudfoundry-incubator/candiedyaml"
-
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
+	"github.com/mandelsoft/spiff/legacy/candiedyaml"
 )
 
 var _ = Describe("Node", func() {
