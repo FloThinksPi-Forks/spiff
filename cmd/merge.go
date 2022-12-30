@@ -9,10 +9,10 @@ import (
 	"path"
 	"strings"
 
-	"github.com/cloudfoundry-incubator/candiedyaml"
 	"github.com/mandelsoft/spiff/debug"
 	"github.com/mandelsoft/spiff/dynaml"
 	"github.com/mandelsoft/spiff/flow"
+	"github.com/mandelsoft/spiff/legacy/candiedyaml"
 	"github.com/mandelsoft/spiff/yaml"
 	"github.com/spf13/cobra"
 )

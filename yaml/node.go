@@ -2,7 +2,7 @@ package yaml
 
 import (
 	"fmt"
-	"github.com/cloudfoundry-incubator/candiedyaml"
+	"github.com/mandelsoft/spiff/legacy/candiedyaml"
 	"reflect"
 	"strings"
 )
